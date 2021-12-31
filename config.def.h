@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "JetBrains Mono Nerd Font:pixelsize=22:antialias=true:autohint=true";
 #if FONT2_PATCH
 /* Spare fonts */
 static char *font2[] = {
@@ -47,7 +47,7 @@ static char *url_opener = "xdg-open";
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = NULL;
+char *scroll = "scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -159,35 +159,43 @@ float alphaUnfocused = 0.6;
 #endif // ALPHA_FOCUS_HIGHLIGHT_PATCH
 #endif // ALPHA_PATCH
 
+/* Define color scheme
+ *
+ * - Material Palenight: 1
+ * - ...
+ *
+ * */
+#define COLORSCHEME 1
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#000000",
+	"#ff5370",
+	"#c3e88d",
+	"#ffcb6b",
+	"#82aaff",
+	"#c792ea",
+	"#89ddff",
+	"#eeffff",
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#546e7a",
+	"#ff5370",
+	"#c3e88d",
+	"#ffcb6b",
+	"#82aaff",
+	"#c792ea",
+	"#89ddff",
+	"#ffffff",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#000000", /* 258 -> bg */
-	"#e5e5e5", /* 259 -> fg */
+	"#a6accd", /* 256 -> cursor */
+	"#a6accd", /* 257 -> rev cursor*/
+	"#292d3e", /* 258 -> bg */
+	"#a6accd", /* 259 -> fg */
 };
 
 
@@ -354,8 +362,8 @@ static MouseShortcut mshortcuts[] = {
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\033[5;2~"}, 0, -1 },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\033[6;2~"}, 0, -1 },
 	#else
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+	{ XK_ANY_MOD,            Button4, ttysend,        {.s = "\033[5;2~"} },
+	{ XK_ANY_MOD,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	#endif // SCROLLBACK_MOUSE_PATCH
 	#if SCROLLBACK_MOUSE_ALTSCREEN_PATCH
 	{ XK_NO_MOD,            Button4, kscrollup,      {.i = 1} },
@@ -395,9 +403,9 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,   {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,     {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,        {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,            {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,            {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,       {.f =  0} },
+	{ ControlMask,          XK_plus,        zoom,            {.f = +1} },
+	{ ControlMask,          XK_minus,       zoom,            {.f = -1} },
+	{ ControlMask,          XK_0,           zoomreset,       {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },
 	#if SCROLLBACK_PATCH

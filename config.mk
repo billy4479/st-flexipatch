@@ -19,10 +19,10 @@ PKG_CONFIG = pkg-config
 #XCURSOR = -lXcursor
 
 # Uncomment the lines below for the ligatures patch / LIGATURES_PATCH
-#LIGATURES_C = hb.c
-#LIGATURES_H = hb.h
-#LIGATURES_INC = `$(PKG_CONFIG) --cflags harfbuzz`
-#LIGATURES_LIBS = `$(PKG_CONFIG) --libs harfbuzz`
+LIGATURES_C = hb.c
+LIGATURES_H = hb.h
+LIGATURES_INC = `$(PKG_CONFIG) --cflags harfbuzz`
+LIGATURES_LIBS = `$(PKG_CONFIG) --libs harfbuzz`
 
 # Uncomment this for the SIXEL patch / SIXEL_PATCH
 #SIXEL_C = sixel.c sixel_hls.c
@@ -38,7 +38,7 @@ LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft ${XRENDER} ${XCURSOR}\
        $(LIGATURES_LIBS)
 
 # flags
-STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
+STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 
 STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 

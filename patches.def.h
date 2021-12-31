@@ -32,7 +32,7 @@
 /* This patch allows st to resize to any pixel size rather than snapping to character width/height.
  * https://st.suckless.org/patches/anysize/
  */
-#define ANYSIZE_PATCH 0
+#define ANYSIZE_PATCH 1
 
 /* This patch aims to prevent black bars being drawn on the edges of st terminals using the anysize
  * patch. This generally only occurs when the terminal background color doesn't match the colors
@@ -41,7 +41,7 @@
  * terminal resizes.)
  * https://github.com/connor-brooks/st-anysize-nobar
  */
-#define ANYSIZE_NOBAR_PATCH 0
+#define ANYSIZE_NOBAR_PATCH 1
 
 /* A simple variant of the anysize patch that only changes the resize hints to allow the window to
  * be resized to any size.
@@ -66,7 +66,7 @@
  *    https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
  * https://st.suckless.org/patches/blinking_cursor/
  */
-#define BLINKING_CURSOR_PATCH 0
+#define BLINKING_CURSOR_PATCH 1
 
 /* By default bold text is rendered with a bold font in the bright variant of the current color.
  * This patch makes bold text rendered simply as bold, leaving the color unaffected.
@@ -83,7 +83,7 @@
  * This patch makes st set CLIPBOARD on selection.
  * https://st.suckless.org/patches/clipboard/
  */
-#define CLIPBOARD_PATCH 0
+#define CLIPBOARD_PATCH 1
 
 /* This patch allows st to be resized without cutting off text when the terminal window is
  * made larger again. Text does not wrap when the terminal window is made smaller.
@@ -92,7 +92,7 @@
  *
  * https://github.com/bakkeby/st-flexipatch/issues/34
  */
-#define COLUMNS_PATCH 0
+#define COLUMNS_PATCH 1
 
 /* Select and copy the last URL displayed with Mod+l. Multiple invocations cycle through the
  * available URLs.
@@ -110,7 +110,7 @@
  * restores the window title (for instance nvim does this when opening and closing).
  * https://st.suckless.org/patches/csi_22_23/
  */
-#define CSI_22_23_PATCH 0
+#define CSI_22_23_PATCH 1
 
 /* According to the specification (see link in BLINKING_CURSOR_PATCH) the "Set cursor style
  * (DECSCUSR), VT520." escape sequences define both values of 0 and 1 as a blinking block,
@@ -125,12 +125,12 @@
  * While many terminal emulators do this it is not adhering to specification. xterm is an
  * example terminal that sets a blinking block instead of the configured one, same as st.
  */
-#define DEFAULT_CURSOR_PATCH 0
+#define DEFAULT_CURSOR_PATCH 1
 
 /* Return BS on pressing backspace and DEL on pressing the delete key.
  * https://st.suckless.org/patches/delkey/
  */
-#define DELKEY_PATCH 0
+#define DELKEY_PATCH 1
 
 /* This patch adds the option of disabling bold fonts globally.
  * https://st.suckless.org/patches/disable_bold_italic_fonts/
@@ -227,7 +227,7 @@
  * https://github.com/cog1to/st-ligatures
  * https://st.suckless.org/patches/ligatures/
  */
-#define LIGATURES_PATCH 0
+#define LIGATURES_PATCH 1
 
 /* This patch makes st ignore terminal color attributes by forcing display of the default
  * foreground and background colors only - making for a monochrome look. Idea ref.
@@ -238,7 +238,7 @@
 /* This patch sets the _NET_WM_ICON X property with a hardcoded icon for st.
  * https://st.suckless.org/patches/netwmicon/
  */
-#define NETWMICON_PATCH 0
+#define NETWMICON_PATCH 1
 
 /* This patch allows you to spawn a new st terminal using Ctrl-Shift-Return. It will have the
  * same CWD (current working directory) as the original st instance.
@@ -256,7 +256,17 @@
  *
  * https://www.reddit.com/r/suckless/comments/cc83om/st_open_url/
  */
-#define OPENURLONCLICK_PATCH 0
+#define OPENURLONCLICK_PATCH 1
+
+/* This patch adds support for OSC escape sequences 10, 11 and 12 that modify the background,
+ * foreground and cursor colors in the way they are implemented in most other terminals
+ * (e.g libvte, kitty). Specifically it differs from https://st.suckless.org/patches/osc_10_11_12/
+ * in that it treats the background and foreground colors as distinct from palette colours
+ * 01 and 07 in order to facilitate the use of theme setting scripts like theme.sh
+ * (https://github.com/lemnos/theme.sh) which expect these colours to be distinct.
+ * https://st.suckless.org/patches/osc_10_11_12_2/
+ */
+#define OSC_10_11_12_2_PATCH 1
 
 /* This patch allows you to specify a border that is relative in size to the width of a cell
  * in the terminal.
@@ -372,7 +382,7 @@
  * scroll program.
  * https://st.suckless.org/patches/universcroll/
  */
-#define UNIVERSCROLL_PATCH 0
+#define UNIVERSCROLL_PATCH 1
 
 /* Vertically center lines in the space available if you have set a larger chscale in config.h
  * https://st.suckless.org/patches/vertcenter/
