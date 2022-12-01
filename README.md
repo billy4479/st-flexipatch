@@ -1,4 +1,4 @@
-Similar to [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) this st 0.8.5 (baa9357, 2022-05-01) project has a different take on st patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more.
+Similar to [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) this st 0.9 (e5e9598, 2022-10-25) project has a different take on st patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more.
 
 For example to include the `alpha` patch then you would only need to flip this setting from 0 to 1 in [patches.h](https://github.com/bakkeby/st-flexipatch/blob/master/patches.def.h):
 ```c
@@ -14,6 +14,12 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
 ---
 
 ### Changelog:
+
+2022-10-24 - Added the fullscreen patch
+
+2022-08-28 - Added the use XftFontMatch patch
+
+2022-08-24 - Added the no window decorations patch
 
 2022-04-11 - Added the background image reload patch
 
@@ -95,9 +101,9 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
    - [anysize](https://st.suckless.org/patches/anysize/)
       - allows st to reize to any pixel size rather than snapping to character width / height
 
-   - [anysize_nobar](https://github.com/connor-brooks/st-anysize-nobar)
-      - a patch that aims to prevent black bars being drawn on the edges of st terminals using the
-        anysize patch
+   - [~anysize\_nobar~](https://github.com/connor-brooks/st-anysize-nobar)
+      - ~a patch that aims to prevent black bars being drawn on the edges of st terminals using the
+        anysize patch~
 
    - [background-image](https://st.suckless.org/patches/background_image/)
       - draws a background image in farbfeld format in place of the defaultbg color allowing for
@@ -128,7 +134,7 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
       - this patch allows you to select and copy the last URL displayed with Mod+l
       - multiple invocations cycle through the available URLs
 
-   - [csi_23_23](https://st.suckless.org/patches/csi_22_23/)
+   - [csi\_23\_23](https://st.suckless.org/patches/csi_22_23/)
       - adds support for CSI escape sequences 22 and 23, which save and restores the window title
         (for instance nvim does this when opening and closing)
 
@@ -170,6 +176,9 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
    - [~force-redraw-after-keypress~](https://lists.suckless.org/hackers/2004/17221.html)
       - ~this patch forces the terminal to check for new data on the tty on keypress with the aim of reducing input latency~
 
+   - [fullscreen](https://st.suckless.org/patches/fullscreen/)
+      - allows the st window to go into fullscreen mode
+
    - [gradient](https://st.suckless.org/patches/gradient/)
       - adds gradient transparency to st
       - depends on the alpha patch
@@ -203,13 +212,16 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
       - allows you to spawn a new st terminal using Ctrl-Shift-Return
       - it will have the same CWD (current working directory) as the original st instance
 
+   - [no-window-decorations](https://github.com/bakkeby/patches/wiki/no_window_decorations)
+      - makes st show without window decorations if the WM supports it
+
    - [open-copied-url](https://st.suckless.org/patches/open_copied_url/)
       - open contents of the clipboard in a user-defined browser
 
    - [openurlonclick](https://www.reddit.com/r/suckless/comments/cc83om/st_open_url/)
       - allows for URLs to be opened directly when you click on them
 
-   - [~osc_10_11_12_2~](https://st.suckless.org/patches/osc_10_11_12_2/)
+   - [~osc\_10\_11\_12\_2~](https://st.suckless.org/patches/osc_10_11_12_2/)
       - ~this patch adds support for OSC escape sequences 10, 11, and 12 in the way they are~
         ~implemented in most other terminals (e.g libvte, kitty)~
       - ~specifically it differs from~ [~osc_10_11_12~](https://st.suckless.org/patches/osc_10_11_12/)
@@ -258,6 +270,10 @@ Refer to [https://st.suckless.org/](https://st.suckless.org/) for details on the
    - [universcroll](https://st.suckless.org/patches/universcroll/)
       - allows mouse scroll without modifier keys for regardless of alt screen using the external
         scroll program
+
+   - [use-XftFontMatch](https://git.suckless.org/st/commit/528241aa3835e2f1f052abeeaf891737712955a0.html)
+      - use XftFontMatch in place of FcFontMatch to allow font to scale with Xft.dpi resource
+        setting
 
    - [vertcenter](https://st.suckless.org/patches/vertcenter/)
       - vertically center lines in the space available if you have set a larger chscale in config.h

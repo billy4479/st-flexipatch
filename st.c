@@ -951,6 +951,7 @@ execsh(char *cmd, char **args)
 	setenv("SHELL", sh, 1);
 	setenv("HOME", pw->pw_dir, 1);
 	setenv("TERM", termname, 1);
+	setenv("COLORTERM", "truecolor", 1);
 
 	signal(SIGCHLD, SIG_DFL);
 	signal(SIGHUP, SIG_DFL);
@@ -1090,15 +1091,16 @@ ttynew(const char *line, char *cmd, const char *out, char **args)
 		#endif // RIGHTCLICKTOPLUMB_PATCH
 			die("pledge\n");
 #endif
-		close(s);
-		cmdfd = m;
 		#if EXTERNALPIPEIN_PATCH && EXTERNALPIPE_PATCH
 		csdfd = s;
+		cmdfd = m;
 		memset(&sa, 0, sizeof(sa));
 		sigemptyset(&sa.sa_mask);
 		sa.sa_handler = sigchld;
 		sigaction(SIGCHLD, &sa, NULL);
 		#else
+		close(s);
+		cmdfd = m;
 		signal(SIGCHLD, sigchld);
 		#endif // EXTERNALPIPEIN_PATCH
 		break;
@@ -1244,7 +1246,7 @@ ttyresize(int tw, int th)
 }
 
 void
-ttyhangup()
+ttyhangup(void)
 {
 	/* Send SIGHUP to shell */
 	kill(pid, SIGHUP);
@@ -1263,6 +1265,12 @@ tattrset(int attr)
 	}
 
 	return 0;
+}
+
+int
+tisaltscr(void)
+{
+	return IS_SET(MODE_ALTSCREEN);
 }
 
 void
@@ -1387,6 +1395,10 @@ tswapscreen(void)
 void
 tscrolldown(int orig, int n)
 {
+	#if OPENURLONCLICK_PATCH
+	restoremousecursor();
+	#endif //OPENURLONCLICK_PATCH
+
 	#if VIM_BROWSE_PATCH
 	if (!orig && historyBufferScroll(-n))
 		return;
@@ -1435,6 +1447,10 @@ tscrollup(int orig, int n, int copyhist)
 tscrollup(int orig, int n)
 #endif // SCROLLBACK_PATCH
 {
+	#if OPENURLONCLICK_PATCH
+	restoremousecursor();
+	#endif //OPENURLONCLICK_PATCH
+
 	#if VIM_BROWSE_PATCH
 	if (!orig && historyBufferScroll(n))
 		return;
